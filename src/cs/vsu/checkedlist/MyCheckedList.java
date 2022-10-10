@@ -101,6 +101,9 @@ public class MyCheckedList<T> extends CheckedList<T> {
 
     @Override
     public T get(int index) {
+        if (index > size-1) {
+            return null;
+        }
         MyListNode cur = getNode(index - 1);
         for (int i = 0; i < iGetHandlers.size(); i++) {
             iGetHandlers.get(i).get(cur);

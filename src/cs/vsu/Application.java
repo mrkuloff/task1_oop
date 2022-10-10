@@ -23,8 +23,7 @@ public class Application {
         values.size();
         values.getFirst();
 
-
-
+        values.get(0);
     }
 }
 
