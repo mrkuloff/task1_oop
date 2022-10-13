@@ -14,7 +14,7 @@ public class AddPrintHandler<T> implements IAddHandler<T> {
 
     @Override
     public void onAdd(T value) {
-        System.out.printf("\n" + text + " "  +  value);
+        System.out.printf(text + " "  +  value + "\n");
     }
 
 

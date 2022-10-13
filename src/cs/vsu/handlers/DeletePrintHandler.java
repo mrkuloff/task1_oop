@@ -14,11 +14,11 @@ public class DeletePrintHandler<T> implements IDeleteHandler<T> {
 
     @Override
     public void onDelete(T value) {
-        System.out.printf("\n" + text + " "  +  value);
+        System.out.printf(text + " "  +  value + "\n");
     }
 
     @Override
     public void onDeleteClear() {
-        System.out.printf("\nУдалены все элементы");
+        System.out.printf("Удалены все элементы" + "\n");
     }
 }

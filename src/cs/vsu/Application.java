@@ -19,10 +19,17 @@ public class Application {
         values.addFirst(0);
         values.addFirst(1);
         values.addFirst(2);
+        values.addLast(43434);
+
+        values.removeFirst();
+
+        values.get(2);
+
+        values.set(0, 3);
 
         values.getFirst();
 
-        values.set(0, 3);
+        values.add(0, 5);
 
         values.getFirst();
 

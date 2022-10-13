@@ -14,6 +14,6 @@ public class GetPrintHandler<T> implements IGetHandler<T> {
 
     @Override
     public void onGet(T value) {
-        System.out.printf("\n" + text + " "  +  value);
+        System.out.printf(text + " "  +  value + "\n");
     }
 }

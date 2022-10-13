@@ -141,7 +141,7 @@ public class LinkedList<T> extends CheckedList<T> {
         }
         MyListNode cur = getNode(index - 1);
         for (int i = 0; i < iGetHandlers.size(); i++) {
-            iGetHandlers.get(i).onGet(cur);
+            iGetHandlers.get(i).onGet(cur.value);
         }
         return getNode(index).value;
     }

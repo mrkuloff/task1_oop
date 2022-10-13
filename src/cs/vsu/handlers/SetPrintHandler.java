@@ -14,6 +14,6 @@ public class SetPrintHandler<T> implements ISetHandler<T> {
 
     @Override
     public void onSet(T value1, T value2) {
-        System.out.printf("\n" + text + " "  +  value1 + " ; " + value2);
+        System.out.printf(text + " "  +  value1 + " ; " + value2 + "\n");
     }
 }
