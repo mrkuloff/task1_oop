@@ -67,6 +67,21 @@ public class LinkedList<T> extends CheckedList<T> {
         }
     }
 
+
+    @Override
+    public void clear() {
+        for (MyListNode x = head; x != null; ) {
+            MyListNode next = x.next;
+            x.value = null;
+            x.next = null;
+            x = next;
+        }
+        size = 0;
+        for (int i = 0; i < iDeleteHandlers.size(); i++) {
+            iDeleteHandlers.get(i).onDeleteClear();
+        }
+    }
+
     @Override
     public void removeFirst() {
         head = head.next;
@@ -132,17 +147,31 @@ public class LinkedList<T> extends CheckedList<T> {
     }
 
     @Override
+    public void set(int index, T value) {
+        MyListNode neww = getNode(index-1);
+        T oldVal = neww.value;
+        neww.value = value;
+        for (int i = 0; i < iSetHandlers.size(); i++) {
+            iSetHandlers.get(i).onSet(oldVal, neww.value);
+        }
+    }
+
+    @Override
     public T getFirst() {
-        for (int i = 0; i < iGetHandlers.size(); i++) {
-            iGetHandlers.get(i).onGet(head.value);
+        if (head.next != null) {
+            for (int i = 0; i < iGetHandlers.size(); i++) {
+                iGetHandlers.get(i).onGet(head.value);
+            }
         }
         return head.value;
     }
 
     @Override
     public T getLast() {
-        for (int i = 0; i < iGetHandlers.size(); i++) {
-            iGetHandlers.get(i).onGet(tail.value);
+        if (head.next != null) {
+            for (int i = 0; i < iGetHandlers.size(); i++) {
+                iGetHandlers.get(i).onGet(tail.value);
+            }
         }
         return tail.value;
     }
