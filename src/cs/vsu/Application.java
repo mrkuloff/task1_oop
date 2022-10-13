@@ -1,11 +1,11 @@
 package cs.vsu;
 
-import cs.vsu.checkedlist.MyCheckedList;
+import cs.vsu.checkedlist.LinkedList;
 import cs.vsu.handlers.*;
 
 public class Application {
     public static void main(String[] args) {
-        MyCheckedList values = new MyCheckedList();
+        LinkedList values = new LinkedList();
 
         IAddHandler addHandler = new AddPrintHandler();
         IDeleteHandler deleteHandler = new DeletePrintHandler();
@@ -20,10 +20,10 @@ public class Application {
 
         values.removeFirst();
 
+        values.add(1, 44);
+
         values.size();
         values.getFirst();
-
-        values.get(0);
     }
 }
 

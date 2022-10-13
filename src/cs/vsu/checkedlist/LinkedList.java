@@ -1,8 +1,6 @@
 package cs.vsu.checkedlist;
 
-import cs.vsu.handlers.IAddHandler;
-
-public class MyCheckedList<T> extends CheckedList<T> {
+public class LinkedList<T> extends CheckedList<T> {
     private MyListNode head = null;
     private MyListNode tail = null;
     private int size = 0;
@@ -22,6 +20,28 @@ public class MyCheckedList<T> extends CheckedList<T> {
     }
 
     @Override
+    public void add(int index, T value) {
+        MyListNode newValue = new MyListNode(value);
+        if (index < 0 || index >= size) {
+            return;
+        }
+        MyListNode cur = getNode(index - 1);
+        MyListNode next = getNode(index);
+        if (index == 0) {
+            addFirst(value);
+        } else if (index == size) {
+            addLast(value);
+        } else {
+            cur.next = newValue;
+            newValue.next = next;
+            size++;
+        }
+        for (int i = 0; i < iAddHandlers.size(); i++) {
+            iAddHandlers.get(i).onAdd(newValue.value);
+        }
+    }
+
+    @Override
     public void addFirst(T value) {
         head = new MyListNode(value, head);
         if (size == 0) {
@@ -29,7 +49,7 @@ public class MyCheckedList<T> extends CheckedList<T> {
         }
         size++;
         for (int i = 0; i < iAddHandlers.size(); i++) {
-            iAddHandlers.get(i).add(value);
+            iAddHandlers.get(i).onAdd(value);
         }
     }
 
@@ -43,7 +63,7 @@ public class MyCheckedList<T> extends CheckedList<T> {
         }
         size++;
         for (int i = 0; i < iAddHandlers.size(); i++) {
-            iAddHandlers.get(i).add(value);
+            iAddHandlers.get(i).onAdd(value);
         }
     }
 
@@ -55,7 +75,7 @@ public class MyCheckedList<T> extends CheckedList<T> {
         }
         size--;
         for (int i = 0; i < iDeleteHandlers.size(); i++) {
-            iDeleteHandlers.get(i).delete(getFirst());
+            iDeleteHandlers.get(i).onDelete(getFirst());
         }
     }
 
@@ -69,7 +89,7 @@ public class MyCheckedList<T> extends CheckedList<T> {
         }
         size--;
         for (int i = 0; i < iDeleteHandlers.size(); i++) {
-            iDeleteHandlers.get(i).delete(getLast());
+            iDeleteHandlers.get(i).onDelete(getLast());
         }
     }
 
@@ -95,7 +115,7 @@ public class MyCheckedList<T> extends CheckedList<T> {
             size--;
         }
         for (int i = 0; i < iDeleteHandlers.size(); i++) {
-            iDeleteHandlers.get(i).delete(cur);
+            iDeleteHandlers.get(i).onDelete(cur);
         }
     }
 
@@ -106,7 +126,7 @@ public class MyCheckedList<T> extends CheckedList<T> {
         }
         MyListNode cur = getNode(index - 1);
         for (int i = 0; i < iGetHandlers.size(); i++) {
-            iGetHandlers.get(i).get(cur);
+            iGetHandlers.get(i).onGet(cur);
         }
         return getNode(index).value;
     }
@@ -114,7 +134,7 @@ public class MyCheckedList<T> extends CheckedList<T> {
     @Override
     public T getFirst() {
         for (int i = 0; i < iGetHandlers.size(); i++) {
-            iGetHandlers.get(i).get(head.value);
+            iGetHandlers.get(i).onGet(head.value);
         }
         return head.value;
     }
@@ -122,7 +142,7 @@ public class MyCheckedList<T> extends CheckedList<T> {
     @Override
     public T getLast() {
         for (int i = 0; i < iGetHandlers.size(); i++) {
-            iGetHandlers.get(i).get(tail.value);
+            iGetHandlers.get(i).onGet(tail.value);
         }
         return tail.value;
     }

@@ -30,6 +30,19 @@ public abstract class CheckedList<T> {
         iGetHandlers.add(getHandler);
     }
 
+    public void removeAddHandler(IAddHandler addHandler) {
+        iAddHandlers.remove(addHandler);
+    }
+
+    public void removeDeleteHandler(IDeleteHandler deleteHandler) {
+        iDeleteHandlers.remove(deleteHandler);
+    }
+
+    public void removeGetHandler(IGetHandler getHandler) {
+        iGetHandlers.remove(getHandler);
+    }
+
+    public abstract void add(int index, T value);
 
     public abstract void addFirst(T value);
 
